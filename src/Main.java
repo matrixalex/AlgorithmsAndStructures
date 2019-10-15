@@ -42,6 +42,8 @@ public class Main {
         myTree.printTree();
         System.out.println("Поддрево");
         myTree.printTree(101);
+        System.out.println("Второе поддрево");
+        myTree.printTree(1);
     }
     public static void main(String[] args) {
         //myArrayListExample();

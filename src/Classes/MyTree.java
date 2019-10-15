@@ -37,7 +37,7 @@ public class MyTree {
         int index = startString.charAt(0) - '0';
         TreeItem connection = root.getConnections()[index];
         if (connection == null) return;
-        if (startString.length() == 1) { printTree(connection, startString); return;}
+        if (startString.length() == 1) { printTree(connection, ""); return;}
         printSubTree(connection, 1, startString);
     }
 
