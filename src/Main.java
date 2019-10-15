@@ -2,7 +2,7 @@ import Classes.MyArrayList;
 import Classes.MyLinkedList;
 import Classes.MyTree;
 
-import java.util.ArrayList;
+import java.sql.SQLOutput;
 
 public class Main {
     private static void myArrayListExample(){
@@ -33,16 +33,18 @@ public class Main {
     private static void myTreeExample(){
         System.out.println("MyTree & TreeItem Classes example");
         MyTree myTree = new MyTree();
-        for (int i = 0; i < 10; i++)
-            for (int j = 0; j < 10; j++)
-                for (int k = 0; k < 10; k++)
-                    myTree.add(i*100+j*10+k);
-
+        myTree.add(10);
+        myTree.add(100);
+        myTree.add(1000);
+        myTree.add(1010);
+        myTree.add(101);
         System.out.println("Добавлено");
         myTree.printTree();
+        System.out.println("Поддрево");
+        myTree.printTree(101);
     }
     public static void main(String[] args) {
-        myArrayListExample();
+        //myArrayListExample();
         myTreeExample();
     }
 }
