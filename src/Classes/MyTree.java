@@ -1,6 +1,5 @@
 package Classes;
 
-import com.sun.source.tree.Tree;
 
 public class MyTree {
     private TreeItem root;

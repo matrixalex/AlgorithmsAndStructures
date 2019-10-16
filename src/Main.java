@@ -1,8 +1,6 @@
-import Classes.MyArrayList;
-import Classes.MyLinkedList;
-import Classes.MyTree;
+import Classes.*;
 
-import java.sql.SQLOutput;
+import java.util.HashMap;
 
 public class Main {
     private static void myArrayListExample(){
@@ -33,20 +31,28 @@ public class Main {
     private static void myTreeExample(){
         System.out.println("MyTree & TreeItem Classes example");
         MyTree myTree = new MyTree();
+        myTree.add(1);
         myTree.add(10);
-        myTree.add(100);
-        myTree.add(1000);
-        myTree.add(1010);
         myTree.add(101);
-        System.out.println("Добавлено");
-        myTree.printTree();
-        System.out.println("Поддрево");
-        myTree.printTree(101);
-        System.out.println("Второе поддрево");
-        myTree.printTree(1);
+        myTree.add(11);
+        myTree.add(111);
+        myTree.add(12);
+        System.out.println(myTree.findInt(11));
+    }
+    private static void myMapExample(){
+        MyHashMap map = new MyHashMap(5);
+        for (int i = 0; i < 25; i++){
+            map.add(new MapItem(i, "Item_" + i));
+        }
+        System.out.println(map);
+        System.out.println(map.contains(new MapItem(20, "Item_" + 20)));
+        System.out.println(map.contains(new MapItem(20, "Item_" + 255)));
+        System.out.println(map.get(20));
+        System.out.println(map.get(Integer.MAX_VALUE));
     }
     public static void main(String[] args) {
         //myArrayListExample();
-        myTreeExample();
+        //myTreeExample();
+        myMapExample();
     }
 }
