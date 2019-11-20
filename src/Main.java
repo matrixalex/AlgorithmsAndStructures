@@ -1,12 +1,10 @@
 import Classes.*;
 
 import java.sql.Time;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
-    /*
+
     private static void myArrayListExample(){
         System.out.println("MyArrayList Class example");
         MyArrayList arr = new MyArrayList(10);
@@ -54,16 +52,7 @@ public class Main {
         System.out.println(map.get(20));
         System.out.println(map.get(Integer.MAX_VALUE));
     }
-    private static void sortExample(){
-        SortingClass sorter = new SortingClass(200);
-        System.out.println(sorter);
-        sorter.bubbleSort();
-        System.out.println(sorter);
-    }
-    public static void main(String[] args) {
-        sortExample();
-    }
-    */
+
     private static void insertSortExample(int[] a){
         for (int i = 1; i < a.length; i++){
             int j = i;
@@ -177,7 +166,7 @@ public class Main {
         return result;
     }
     private static void sortExamples(){
-        int n = 1000000;
+        int n = 10000;
         long start, end;
         int[] original = generate(n);
         System.out.println(Arrays.toString(Arrays.copyOf(original,50)));
@@ -209,10 +198,97 @@ public class Main {
         end = System.currentTimeMillis();
         System.out.println("piramid_sort time: " + (end - start));
         System.out.println(Arrays.toString(Arrays.copyOf(a,50)));
-    }
-    public static void main(String[] args) {
 
+        // Quick sort
+        a = Arrays.copyOf(original, original.length);
+        start = System.currentTimeMillis();
+        quickSort(a);
+        end = System.currentTimeMillis();
+        System.out.println("piramid_sort time: " + (end - start));
+        System.out.println(Arrays.toString(Arrays.copyOf(a,50)));
     }
+    private static void quickSort(int[] a){
+        int r = partition(a,0, a.length - 1);
+        System.out.println(r);
+    }
+
+    private static int partition( int[] a, int p, int q){
+        System.out.println("partition for " + p + " and " + q);
+        int j = -1;
+        int value = a[q];
+        for (int i = p; i < q; i++){
+            if (a[i] <= value){
+                j++;
+                System.out.println(Arrays.toString(a));
+                System.out.println("swapping a[" + i + "] = " + a[i] + " and a[" + j + "] = " + a[j] + "\n");
+                swap(a, i, j);
+
+            }
+        }
+        if (j != -1){
+            System.out.println(Arrays.toString(a));
+            System.out.println("swapping a[" + p + "] = " + a[p] + " and a[" + (j+1) + "] = " + a[j+1] + "\n");
+            swap(a, q, ++j);
+        }
+        return j;
+    }
+
+    private static int[] calcSort(int[] a, int max){
+        int[] count = new int[max + 1];
+        int[] result = new int[a.length];
+        for (int v: a) count[v]++;
+        System.out.println(Arrays.toString(Arrays.copyOf(count, 50)));
+        for (int i = 1; i < count.length; i++) count[i] += count[i - 1];
+        for (int i = a.length - 1; i >= 0; i--) result[(count[a[i]]--) - 1] = a[i];
+        return result;
+    }
+
+    private static int[] radixSort(int[] array, int d){
+        int[] result = new int[array.length];
+        for (int j = 0; j < d; j++) {
+            int[] c = new int[10];
+            int[] b = new int[array.length];
+            for (int i = 0; i < array.length; i++){
+                c[getRadix(array[i], j)]++;
+            }
+            for (int i = 1; i < c.length; i++){
+                c[i] += c[i-1];
+            }
+            for (int i = 1; i < c.length; i++){
+                b[c[getRadix(array[i],j)] - 1] = array[i];
+                c[getRadix(array[i], j)]--;
+            }
+            array = b;
+        }
+        return array;
+    }
+
+    private static int getRadix(int num, int index){
+        int divider = (int) Math.pow(10, index);
+        int temp = num / divider;
+        return temp % 10;
+    }
+
+    public static void main(String[] args){
+        Random r = new Random();
+        int max = 100;
+        int n = 5;
+        int[] a = new int[n];
+        for (int i = 0; i < n; i++){
+            a[i] = r.nextInt(max);
+        }
+        int search_val = 3;
+        System.out.println(Arrays.toString(a));
+        System.out.println("Searching for " + search_val);
+        int k = partition(a, 0, a.length);
+        while (k != search_val){
+            if (k < search_val) k = partition(a, 0, k);
+            else {
+                k = partition(a, k, a.length);
+            }
+        }
+    }
+
 
 
 }
